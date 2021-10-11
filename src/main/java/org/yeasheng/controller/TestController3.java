@@ -3,6 +3,7 @@ package org.yeasheng.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.yeasheng.service.MyService;
+import org.yeasheng.service.RedisService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -16,26 +17,15 @@ import javax.servlet.http.HttpServletResponse;
 public class TestController3 {
 
     @Resource
-    private HttpServletRequest request;
-
-    @Resource
-    private HttpServletResponse response;
-
-    @Resource
-    private MyService myService;
+    private RedisService redisService;
 
 
     @RequestMapping(value = "/test3")
-    public void thread1(HttpServletRequest req, HttpServletResponse response) throws Exception{
-
-        System.out.println("客户端：" + request.getHeader("Thread"));
-    }
-
-    @RequestMapping(value = "/test4")
-    public void thread2(){
-        int i = 5;
-        int result = myService.increase(i);
-        System.out.println("相加之后" +Thread.currentThread().getName()+"*****"+result);
+    public String test4() {
+        redisService.set("test", "12345678");
+        String result = redisService.get("test").toString();
+        System.out.println(result);
+        return result;
     }
 
 
