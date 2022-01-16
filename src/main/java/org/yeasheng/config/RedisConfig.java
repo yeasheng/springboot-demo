@@ -18,8 +18,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-import org.yeasheng.service.RedisService;
-import org.yeasheng.service.impl.RedisServiceImpl;
 import redis.clients.jedis.JedisPoolConfig;
 
 /**
@@ -95,11 +93,6 @@ public class RedisConfig {
         objectMapper.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL);
         serializer.setObjectMapper(objectMapper);
         return serializer;
-    }
-
-    @Bean
-    public RedisService redisService(RedisTemplate<String, Object> redisTemplate) {
-        return new RedisServiceImpl(redisTemplate);
     }
 
 }

@@ -26,15 +26,33 @@ spring:
     database: 0
     host: 127.0.0.1
     port: 6379
-    password:
-    timeout: 1000
+    password:  # Redis服务器连接密码（默认为空）
+    timeout: 3000
     jedis:
       pool:
-        max-active: 8
-        max-wait: -1
-        max-idle: 8
-        min-idle: 0
+        max-active: 8 # 连接池最大连接数（使用负值表示没有限制）
+        max-wait: -1 # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-idle: 8 # 连接池中的最大空闲连接
+        min-idle: 0 # 连接池中的最小空闲连接
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      # 如果两个应用程序为并行消费某个topic的消息，需要将两个应用的group-id指定一致
+      group-id: "message-group"
+    listener:
+      # 指定消息消费的模式，type=batch代表可以批量消费
+      type: batch
+      # 指定消费者的并发数，也就是可以同时有多少个消费者线程在监听数据，默认为1
+      # 根据情况设置并行数据，通常建议最小为Cpu的核心数
+      concurrency: 16
 
 logging:
   level:
     root: info
+    org:
+      springframework:
+        test: error
+redis:
+  prefix:
+    key: "demo"

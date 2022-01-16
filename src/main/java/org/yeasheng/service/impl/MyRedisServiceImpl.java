@@ -1,13 +1,11 @@
 package org.yeasheng.service.impl;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-import org.yeasheng.service.RedisService;
+import org.yeasheng.service.MyRedisService;
 
-import javax.annotation.Resource;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -19,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  **/
 
 @AllArgsConstructor
-public class RedisServiceImpl implements RedisService {
+public class MyRedisServiceImpl implements MyRedisService {
 
     private RedisTemplate<String, Object> redisTemplate;
 
@@ -58,7 +56,7 @@ public class RedisServiceImpl implements RedisService {
             if (key.length == 1) {
                 redisTemplate.delete(key[0]);
             } else {
-                redisTemplate.delete(CollectionUtils.arrayToList(key));
+                redisTemplate.delete((Collection<String>) CollectionUtils.arrayToList(key));
             }
         }
     }

@@ -10,7 +10,7 @@ import java.util.Set;
  * @author yansh
  * @version 2021/10/10
  **/
-public interface RedisService {
+public interface MyRedisService {
     /**
      * 指定缓存失效时间
      *

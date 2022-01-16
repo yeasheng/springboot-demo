@@ -3,8 +3,12 @@ package org.yeasheng.multithread;
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadInfo;
 import java.lang.management.ThreadMXBean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class MultiThread {
+
+    AtomicInteger integer = new AtomicInteger(5);
+
     public static void main(String[] args) {
         // 获取 Java 线程管理 MXBean
     ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();
