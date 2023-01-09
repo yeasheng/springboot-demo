@@ -31,7 +31,24 @@ public class RedisServiceImpl implements RedisService {
     @Override
     public String get(String key) {
         Object obj = redisTemplate.opsForValue().get(key);
-        return obj == null ? "": obj.toString();
+        return obj == null ? "" : obj.toString();
+    }
+
+    @Override
+    public void lpush(String key, String value) {
+        redisTemplate.opsForList().rightPush(key, value);
+    }
+
+    @Override
+    public String index(String key, int index) {
+        Object obj = redisTemplate.opsForList().index(key, index);
+        return obj == null ? "" : obj.toString();
+    }
+
+    @Override
+    public String range(String key, int start, int end) {
+        Object obj = redisTemplate.opsForList().range(key, start, end);
+        return obj == null ? "" : obj.toString();
     }
 
     @Override
